@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mysql = require("mysql");
+const bcrypt = require("bcryptjs");
 const middleware = require("./middleware");
 
 const con = require("./db");
@@ -22,23 +23,32 @@ router.post("/register", middleware.validateUserData, (req, res) => {
       } else if (result.length !== 0) {
         return res.status(400).json({ msg: "This email already exits" });
       } else {
-        con.query(
-          `INSERT INTO users (email, password) VALUES (${mysql.escape(
-            email
-          )}, ${mysql.escape(req.body.password)})`,
-          (err, result) => {
-            if (err) {
-              console.log(err);
-              return res
-                .status(400)
-                .json({ msg: "Internal server error saving user details" });
-            } else {
-              return res
-                .status(200)
-                .json({ msg: "User has been successfully registered" });
-            }
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          if (err) {
+            comsole.log(err);
+            return res.json({
+              msg: "Internal server error hashing user details",
+            });
+          } else {
+            con.query(
+              `INSERT INTO users (email, password) VALUES (${mysql.escape(
+                email
+              )}, ${mysql.escape(hash)})`,
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  return res
+                    .status(400)
+                    .json({ msg: "Internal server error saving user details" });
+                } else {
+                  return res
+                    .status(200)
+                    .json({ msg: "User has been successfully registered" });
+                }
+              }
+            );
           }
-        );
+        });
       }
     }
   );
