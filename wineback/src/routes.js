@@ -1,0 +1,47 @@
+const express = require("express");
+const router = express.Router();
+const mysql = require("mysql");
+const middleware = require("./middleware");
+
+const con = require("./db");
+
+router.get("/", (req, res) => {
+  res.send("This boilerplate is working!");
+});
+
+router.post("/register", middleware.validateUserData, (req, res) => {
+  const email = req.body.email.toLowerCase();
+  con.query(
+    `SELECT * FROM users WHERE email = ${mysql.escape(email)}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        return res
+          .status(400)
+          .json({ msg: "Internal server error checking username validity" });
+      } else if (result.length !== 0) {
+        return res.status(400).json({ msg: "This email already exits" });
+      } else {
+        con.query(
+          `INSERT INTO users (email, password) VALUES (${mysql.escape(
+            email
+          )}, ${mysql.escape(req.body.password)})`,
+          (err, result) => {
+            if (err) {
+              console.log(err);
+              return res
+                .status(400)
+                .json({ msg: "Internal server error saving user details" });
+            } else {
+              return res
+                .status(200)
+                .json({ msg: "User has been successfully registered" });
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+module.exports = router;
