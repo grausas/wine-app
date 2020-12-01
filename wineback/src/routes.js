@@ -69,11 +69,22 @@ router.post("/login", (req, res) => {
           msg: "The provided details are incorrect or the user does not exist",
         });
       } else {
-        if (req.body.password !== result[0].password) {
-          res.status(400).json({ msg: "The provided password is incorrect" });
-        } else {
-          res.status(200).json({ msg: "Logged In" });
-        }
+        bcrypt.compare(
+          req.body.password,
+          result[0].password,
+          (bErr, bResult) => {
+            if (bErr || !bResult) {
+              return res
+                .status(400)
+                .json({
+                  msg:
+                    "The provided details are incorect or the user doesnt not exits",
+                });
+            } else {
+              res.status(200).json({ msg: "Logged In" });
+            }
+          }
+        );
       }
     }
   );
