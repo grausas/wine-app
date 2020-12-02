@@ -5,6 +5,8 @@ import { Header, Loading } from "./components";
 
 const HomeLazy = lazy(() => import("./pages/Home/Home"));
 const AboutLazy = lazy(() => import("./pages/About/About"));
+const Register = lazy(() => import("./pages/Register/Register"));
+const Login = lazy(() => import("./pages/Login/Login"));
 
 function Routes() {
   return (
@@ -14,6 +16,8 @@ function Routes() {
         <Switch>
           <Route exact path="/" component={HomeLazy} />
           <Route exact path="/about" component={AboutLazy} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Suspense>
     </Router>
