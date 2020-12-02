@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mysql = require("mysql");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const middleware = require("./middleware");
-
 const con = require("./db");
 
 router.get("/", (req, res) => {
@@ -54,7 +54,7 @@ router.post("/register", middleware.validateUserData, (req, res) => {
   );
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", middleware.validateUserData, (req, res) => {
   const email = req.body.email.toLowerCase();
   con.query(
     `SELECT * FROM users WHERE email = ${mysql.escape(email)}`,
@@ -74,14 +74,27 @@ router.post("/login", (req, res) => {
           result[0].password,
           (bErr, bResult) => {
             if (bErr || !bResult) {
-              return res
-                .status(400)
-                .json({
-                  msg:
-                    "The provided details are incorect or the user doesnt not exits",
-                });
-            } else {
-              res.status(200).json({ msg: "Logged In" });
+              return res.status(400).json({
+                msg:
+                  "The provided details are incorect or the user doesnt not exits",
+              });
+            } else if (bResult) {
+              const token = jwt.sign(
+                {
+                  userId: result[0].id,
+                  email: result[0].email,
+                },
+                process.env.SECRET_KEY,
+                {
+                  expiresIn: "7d",
+                }
+              );
+              console.log(token);
+
+              return res.status(200).json({
+                msg: "Logged In",
+                token,
+              });
             }
           }
         );
