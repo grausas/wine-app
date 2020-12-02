@@ -1,4 +1,12 @@
 const theme = {
+  gutterSize: "2em",
+  websiteWidth: "768px",
+  standard: {
+    height: "45px",
+  },
+  small: {
+    height: "30px",
+  },
   primary: {
     background: "#333333",
     color: "#ffffff",

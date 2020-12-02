@@ -12,6 +12,8 @@ function Header() {
       <S.Actions>
         <S.StyledLink to="/">Home</S.StyledLink>
         <S.StyledLink to="/about">About</S.StyledLink>
+        <S.StyledLink to="/register">Register</S.StyledLink>
+        <S.StyledLink to="/login">Login</S.StyledLink>
       </S.Actions>
     </S.Header>
   );

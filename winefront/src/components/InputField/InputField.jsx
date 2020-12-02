@@ -1,4 +1,5 @@
 import React from "react";
+import * as S from "./InputField.style";
 
 function InputField({
   type,
@@ -10,10 +11,10 @@ function InputField({
   handleChange,
 }) {
   return (
-    <div className="field">
-      <label>{labelText}</label>
+    <div>
+      <S.Label>{labelText}</S.Label>
       <div>
-        <input
+        <S.Input
           type={type}
           placeholder={placeholder}
           required={required}
