@@ -26,14 +26,11 @@ export const StyledLink = styled(Link)`
   color: #111;
   &:hover {
     text-decoration: underline;
+    color: #ccc;
   }
   &:not(last-child) {
     margin-left: 20px;
   }
-`;
-
-export const BottomLine = styled.div`
-  border-bottom: 2px solid #eee;
 `;
 
 export const LogoutButton = styled(Button)`
