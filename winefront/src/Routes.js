@@ -11,10 +11,14 @@ const Login = lazy(() => import("./pages/Login/Login"));
 
 function Routes() {
   const auth = useContext(AuthContext);
+
   return (
     <Router>
       <GlobalStyle />
-      <Header isLoggedIn={!!auth.token} />
+      <Header
+        isLoggedIn={!!auth.token}
+        logOut={() => auth.clearLocalStorage()}
+      />
       <Suspense fallback={<Loading />}>
         <Switch>
           <Route exact path="/" component={HomeLazy} />
