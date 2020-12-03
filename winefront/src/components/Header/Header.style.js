@@ -5,7 +5,12 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
+  &:after {
+    content: "Your Wine";
+    display: block;
+    position: absolute;
+    left: 300px;
+  }
 `;
 
 export const Logo = styled.img`
@@ -18,11 +23,14 @@ export const Actions = styled.nav``;
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: #111;
-  text-transform: uppercase;
   &:hover {
     text-decoration: underline;
   }
   &:not(:last-child) {
     margin-right: 10px;
   }
+`;
+
+export const BottomLine = styled.div`
+  border-bottom: 2px solid #eee;
 `;

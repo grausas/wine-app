@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import GlobalStyle from "./globalStyle";
 import { Header, Loading } from "./components";
 import { AuthContext } from "./context/AuthContext";
 
@@ -12,6 +13,7 @@ function Routes() {
   const auth = useContext(AuthContext);
   return (
     <Router>
+      <GlobalStyle />
       <Header isLoggedIn={!!auth.token} />
       <Suspense fallback={<Loading />}>
         <Switch>
