@@ -28,7 +28,7 @@ export const StyledLink = styled(Link)`
     text-decoration: underline;
   }
   &:not(last-child) {
-    margin-left: 10px;
+    margin-left: 20px;
   }
 `;
 

@@ -8,6 +8,7 @@ const HomeLazy = lazy(() => import("./pages/Home/Home"));
 const AboutLazy = lazy(() => import("./pages/About/About"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const Login = lazy(() => import("./pages/Login/Login"));
+const WineTypes = lazy(() => import("./pages/WineTypes/WineTypes"));
 
 function Routes() {
   const auth = useContext(AuthContext);
@@ -25,6 +26,7 @@ function Routes() {
           <Route exact path="/about" component={AboutLazy} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/winetypes" component={WineTypes} />
         </Switch>
       </Suspense>
     </Router>

@@ -16,7 +16,7 @@ function Header({ isLoggedIn, logOut }) {
             {isLoggedIn && (
               <>
                 <S.StyledLink to="/">Home</S.StyledLink>
-                <S.StyledLink to="/about">About</S.StyledLink>
+                <S.StyledLink to="/winetypes">Wine Types</S.StyledLink>
                 <S.LogoutButton handleClick={logOut} color="primary">
                   Logout
                 </S.LogoutButton>
