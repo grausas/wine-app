@@ -103,4 +103,41 @@ router.post("/login", middleware.validateUserData, (req, res) => {
   );
 });
 
+router.post("/add-wine-type", middleware.isLoggedIn, (req, res) => {
+  const data = req.body;
+  if (data.winename && data.region && data.winetype && data.year) {
+    con.query(
+      `INSERT INTO wine_types (winename, region, winetype, year) VALUES (${mysql.escape(
+        data.winename
+      )}, ${mysql.escape(data.region)}, ${mysql.escape(
+        data.winetype
+      )}, ${mysql.escape(data.year)})`,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res
+            .status(400)
+            .json({ msg: "Internal server error adding wine details" });
+        } else {
+          console.log(result);
+          return res.status(201).json({ msg: "Wine type successufully added" });
+        }
+      }
+    );
+  } else {
+    return res.status(201).json({ msg: "Passed values are incorrect" });
+  }
+});
+
+router.get("/view-wine-types", middleware.isLoggedIn, (req, res) => {
+  con.query(`SELECT * FROM wine_types`, (err, result) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(400)
+        .json({ msg: "Internal server error getting the details" });
+    } else res.json(result);
+  });
+});
+
 module.exports = router;
