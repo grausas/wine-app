@@ -1,7 +1,7 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import { Header, Loading } from "./components";
+import { AuthContext } from "./context/AuthContext";
 
 const HomeLazy = lazy(() => import("./pages/Home/Home"));
 const AboutLazy = lazy(() => import("./pages/About/About"));
@@ -9,9 +9,10 @@ const Register = lazy(() => import("./pages/Register/Register"));
 const Login = lazy(() => import("./pages/Login/Login"));
 
 function Routes() {
+  const auth = useContext(AuthContext);
   return (
     <Router>
-      <Header />
+      <Header isLoggedIn={!!auth.token} />
       <Suspense fallback={<Loading />}>
         <Switch>
           <Route exact path="/" component={HomeLazy} />
