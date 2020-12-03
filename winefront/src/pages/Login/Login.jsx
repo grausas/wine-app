@@ -55,7 +55,9 @@ function Login() {
           />
         </S.InputWrapper>
 
-        <Button type="submit">Login</Button>
+        <Button color="primary" type="submit">
+          Login
+        </Button>
       </form>
     </Section>
   );

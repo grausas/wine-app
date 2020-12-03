@@ -48,7 +48,9 @@ function Register() {
           />
         </S.InputWrapper>
 
-        <Button type="submit">Register</Button>
+        <Button color="primary" type="submit">
+          Register
+        </Button>
       </form>
     </Section>
   );
