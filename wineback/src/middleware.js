@@ -4,13 +4,17 @@ require("dotenv").config();
 module.exports = {
   validateUserData: (req, res, next) => {
     const data = req.body;
-    if (!data.email || data.email < 6 || data.email > 256) {
+    if (!data.email || data.email.length < 6 || data.email.length > 256) {
       return res
         .status(400)
         .json({ msg: "Error: Email does not follow the rules" });
     }
 
-    if (!data.password || data.password < 8 || data.password > 64) {
+    if (
+      !data.password ||
+      data.password.length < 8 ||
+      data.password.length > 64
+    ) {
       return res
         .status(400)
         .json({ msg: "Error: Password does not follow the rules" });
