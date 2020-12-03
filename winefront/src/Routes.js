@@ -19,7 +19,10 @@ function Routes() {
       <GlobalStyle />
       <Header
         isLoggedIn={!!auth.token}
-        logOut={() => auth.clearLocalStorage()}
+        logOut={() => {
+          auth.setToken();
+          localStorage.removeItem("token");
+        }}
       />
       <Suspense fallback={<Loading />}>
         <Switch>
