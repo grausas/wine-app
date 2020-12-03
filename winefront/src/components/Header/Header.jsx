@@ -4,7 +4,7 @@ import * as S from "./Header.style";
 import { Link } from "react-router-dom";
 import logoImg from "../../assets/wine.svg";
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, logOut }) {
   return (
     <S.BottomLine>
       <Section>
@@ -17,6 +17,9 @@ function Header({ isLoggedIn }) {
               <>
                 <S.StyledLink to="/">Home</S.StyledLink>
                 <S.StyledLink to="/about">About</S.StyledLink>
+                <S.LogoutButton handleClick={logOut} color="primary">
+                  Logout
+                </S.LogoutButton>
               </>
             )}
             {!isLoggedIn && (

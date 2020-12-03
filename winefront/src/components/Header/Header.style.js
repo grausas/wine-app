@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../";
 import { Link } from "react-router-dom";
 
 export const Header = styled.header`
@@ -26,11 +27,15 @@ export const StyledLink = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
-  &:not(:last-child) {
-    margin-right: 10px;
+  &:not(last-child) {
+    margin-left: 10px;
   }
 `;
 
 export const BottomLine = styled.div`
   border-bottom: 2px solid #eee;
+`;
+
+export const LogoutButton = styled(Button)`
+  margin-left: 30px;
 `;
