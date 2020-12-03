@@ -4,11 +4,12 @@ export const Input = styled.input`
   width: 100%;
   padding: 1em;
   font-size: 1.2em;
-  border: 1px solid ${(props) => props.theme.secondary.background};
+  border: none;
+  background: ${(props) => props.theme.primary.background};
   height: ${(props) => props.theme.standard.height};
   border-radius: 5px;
+  color: ${(props) => props.theme.primary.color};
   box-sizing: border-box;
-  color: #ccc;
   &:focus {
     border: 1px solid ${(props) => props.theme.secondary.focus.background};
     outline: none;

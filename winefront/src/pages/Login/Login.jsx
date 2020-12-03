@@ -16,7 +16,7 @@ function signUser(data, auth, history) {
     .then((data) => {
       if (data.token) {
         auth.setToken(data.token);
-        history.push("/");
+        history.push("/winetypes");
       } else {
         console.log("Error");
       }
