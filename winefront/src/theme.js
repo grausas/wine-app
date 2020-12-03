@@ -8,8 +8,8 @@ const theme = {
     height: "30px",
   },
   primary: {
-    background: "#333333",
-    color: "#ffffff",
+    background: "#292f38",
+    color: "#ccc",
     hover: {
       background: "#222222",
     },
