@@ -19,6 +19,10 @@ export const Button = styled.button`
       props.color === "primary"
         ? props.theme.primary.hover.background
         : props.theme.secondary.hover.background};
+    color: ${(props) =>
+      props.color === "primary"
+        ? props.theme.primary.hover.color
+        : props.theme.secondary.hover.color};
   }
   &:focus {
     background: ${(props) =>
