@@ -18,11 +18,10 @@ function InputField({
           <S.Label>{labelText}</S.Label>
           <S.Select onChange={handleChange} defaultValue required>
             <option disabled value>
-              {options[0].name}
+              Select option
             </option>
-
             {options &&
-              options.slice(1).map((option) => (
+              options.map((option) => (
                 <option key={option.id} value={option.value}>
                   {option.name}
                 </option>

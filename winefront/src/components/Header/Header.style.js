@@ -22,8 +22,12 @@ export const StyledLink = styled(Link)`
     text-decoration: underline;
     color: #eee;
   }
-  &:not(last-child) {
-    margin-left: 20px;
+
+  &:not(:last-child) {
+    :after {
+      content: "|";
+      padding: 0 10px;
+    }
   }
 `;
 

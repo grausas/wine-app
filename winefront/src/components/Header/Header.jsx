@@ -13,20 +13,23 @@ function Header({ isLoggedIn, logOut }) {
             <S.Logo src={logoImg} alt="Logo" />
           </Link>
           <S.Actions>
+            {!isLoggedIn && (
+              <>
+                <S.StyledLink to="/register">Register</S.StyledLink>
+                <S.StyledLink to="/login">Login</S.StyledLink>
+              </>
+            )}
             {isLoggedIn && (
               <>
+                <S.StyledLink to="/addwinequantity">
+                  Add Wine Quantity
+                </S.StyledLink>
                 <S.StyledLink to="/winequantity">Wine Quantity</S.StyledLink>
                 <S.StyledLink to="/winetypes">Wine Types</S.StyledLink>
                 <S.StyledLink to="/addwinetypes">Add Wine</S.StyledLink>
                 <S.StyledLink onClick={logOut} to="/login">
                   <Button color="primary">Logout</Button>
                 </S.StyledLink>
-              </>
-            )}
-            {!isLoggedIn && (
-              <>
-                <S.StyledLink to="/register">Register</S.StyledLink>
-                <S.StyledLink to="/login">Login</S.StyledLink>
               </>
             )}
           </S.Actions>

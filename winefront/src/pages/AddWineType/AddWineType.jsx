@@ -57,9 +57,7 @@ function AddWineType() {
               <InputField
                 labelText="Wine Type"
                 type="dropdown"
-                placeholder="Wine type"
                 options={[
-                  { id: 0, name: "Select Wine Type" },
                   { id: 1, value: "White", name: "White" },
                   { id: 2, value: "Red", name: "Red" },
                   { id: 3, value: "Rose", name: "Rose" },
