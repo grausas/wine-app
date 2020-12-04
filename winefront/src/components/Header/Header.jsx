@@ -15,7 +15,7 @@ function Header({ isLoggedIn, logOut }) {
           <S.Actions>
             {isLoggedIn && (
               <>
-                <S.StyledLink to="/">Home</S.StyledLink>
+                <S.StyledLink to="/winequantity">Wine Quantity</S.StyledLink>
                 <S.StyledLink to="/winetypes">Wine Types</S.StyledLink>
                 <S.StyledLink to="/addwinetypes">Add Wine</S.StyledLink>
                 <S.StyledLink onClick={logOut} to="/login">
