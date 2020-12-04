@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Input = styled.input`
   width: 100%;
-  padding: 1em;
-  font-size: 1.2em;
+  padding: 0 1em;
+  /* font-size: 1.2em; */
   border: none;
   background: #ccc;
   height: ${(props) => props.theme.standard.height};

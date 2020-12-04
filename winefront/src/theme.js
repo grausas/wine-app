@@ -2,7 +2,7 @@ const theme = {
   gutterSize: "2em",
   websiteWidth: "768px",
   standard: {
-    height: "45px",
+    height: "40px",
   },
   small: {
     height: "30px",
