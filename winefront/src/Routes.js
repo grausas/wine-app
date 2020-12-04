@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyle";
-import { Header, Loading } from "./components";
+import { Header, Loading, Footer } from "./components";
 import { AuthContext } from "./context/AuthContext";
 
 const HomeLazy = lazy(() => import("./pages/Home/Home"));
@@ -34,6 +34,7 @@ function Routes() {
           <Route exact path="/addwinetypes" component={AddWineTypes} />
         </Switch>
       </Suspense>
+      <Footer />
     </Router>
   );
 }
