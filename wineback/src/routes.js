@@ -140,4 +140,44 @@ router.get("/view-wine-types", middleware.isLoggedIn, (req, res) => {
   });
 });
 
+router.post("/add-wine", middleware.isLoggedIn, (req, res) => {
+  const userId = req.userData.userId;
+
+  con.query(
+    `INSERT INTO winequantity (userid, wineid, changeqty) VALUES (${mysql.escape(
+      userId
+    )}, ${mysql.escape(req.body.wineId)}, ${mysql.escape(req.body.changeQty)})`,
+    (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res
+          .status(201)
+          .json({ msg: "Successfully added the wine to the database!" });
+      }
+    }
+  );
+});
+
+router.get("/view-wines", middleware.isLoggedIn, (req, res) => {
+  const userId = req.userData.userId;
+  con.query(
+    `SELECT a.id, a.wineid, SUM(a.changeqty) AS total, b.winename, b.winetype, b.region, b.year FROM winequantity a INNER JOIN wine_types b ON a.wineid = b.id WHERE userid = ${userId} GROUP BY wineid`,
+    (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
+});
+
+router.get("/view-names", middleware.isLoggedIn, (req, res) => {
+  con.query(
+    `SELECT id, winename FROM wine_types GROUP BY winename`,
+    (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
+});
+
 module.exports = router;
