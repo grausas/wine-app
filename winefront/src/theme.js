@@ -9,7 +9,7 @@ const theme = {
   },
   primary: {
     background: "#292f38",
-    color: "#ccc",
+    color: "#111",
     hover: {
       background: "#222222",
     },
@@ -18,10 +18,11 @@ const theme = {
     },
   },
   secondary: {
-    background: "#eeeeee",
-    color: "#222222",
+    background: "#ccc",
+    color: "#111",
     hover: {
       background: "#e8e8e8",
+      color: "#111",
     },
     focus: {
       background: "#e3e3e3",
