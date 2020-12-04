@@ -32,33 +32,36 @@ function Login() {
   return (
     <Section>
       <h2>Login</h2>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          signUser(data, auth, history);
-        }}
-      >
-        <S.InputWrapper>
-          <InputField
-            labelText="Email"
-            type="email"
-            placeholder="Email"
-            handleChange={(e) => setData({ ...data, email: e.target.value })}
-          />
-        </S.InputWrapper>
-        <S.InputWrapper>
-          <InputField
-            labelText="Password"
-            type="password"
-            placeholder="Password"
-            handleChange={(e) => setData({ ...data, password: e.target.value })}
-          />
-        </S.InputWrapper>
+      <S.FormBox>
+        <S.FormTitle>Enter Login Details</S.FormTitle>
+        <S.Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            signUser(data, auth, history);
+          }}
+        >
+          <S.InputWrapper>
+            <InputField
+              labelText="Email"
+              type="email"
+              placeholder="Email"
+              handleChange={(e) => setData({ ...data, email: e.target.value })}
+            />
+          </S.InputWrapper>
+          <S.InputWrapper>
+            <InputField
+              labelText="Password"
+              type="password"
+              placeholder="Password"
+              handleChange={(e) =>
+                setData({ ...data, password: e.target.value })
+              }
+            />
+          </S.InputWrapper>
 
-        <Button color="primary" type="submit">
-          Login
-        </Button>
-      </form>
+          <Button type="submit">Login</Button>
+        </S.Form>
+      </S.FormBox>
     </Section>
   );
 }

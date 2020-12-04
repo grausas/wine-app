@@ -25,33 +25,35 @@ function Register() {
   return (
     <Section>
       <h2>Register</h2>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          registerUser(data, history);
-        }}
-      >
-        <S.InputWrapper>
-          <InputField
-            labelText="Email"
-            type="email"
-            placeholder="Email"
-            handleChange={(e) => setData({ ...data, email: e.target.value })}
-          />
-        </S.InputWrapper>
-        <S.InputWrapper>
-          <InputField
-            labelText="Password"
-            type="text"
-            placeholder="Password"
-            handleChange={(e) => setData({ ...data, password: e.target.value })}
-          />
-        </S.InputWrapper>
-
-        <Button color="primary" type="submit">
-          Register
-        </Button>
-      </form>
+      <S.FormBox>
+        <S.FormTitle>Enter Registration details</S.FormTitle>
+        <S.Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            registerUser(data, history);
+          }}
+        >
+          <S.InputWrapper>
+            <InputField
+              labelText="Email"
+              type="email"
+              placeholder="Email"
+              handleChange={(e) => setData({ ...data, email: e.target.value })}
+            />
+          </S.InputWrapper>
+          <S.InputWrapper>
+            <InputField
+              labelText="Password"
+              type="text"
+              placeholder="Password"
+              handleChange={(e) =>
+                setData({ ...data, password: e.target.value })
+              }
+            />
+          </S.InputWrapper>
+          <Button type="submit">Register</Button>
+        </S.Form>
+      </S.FormBox>
     </Section>
   );
 }

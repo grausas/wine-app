@@ -6,12 +6,6 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  &:after {
-    content: "Your Wine";
-    display: block;
-    position: absolute;
-    left: 300px;
-  }
 `;
 
 export const Logo = styled.img`
@@ -26,7 +20,7 @@ export const StyledLink = styled(Link)`
   color: #111;
   &:hover {
     text-decoration: underline;
-    color: #ccc;
+    color: #eee;
   }
   &:not(last-child) {
     margin-left: 20px;
@@ -35,4 +29,8 @@ export const StyledLink = styled(Link)`
 
 export const LogoutButton = styled(Button)`
   margin-left: 30px;
+`;
+
+export const StyledLine = styled.div`
+  border-bottom: 2px solid #292f38;
 `;
