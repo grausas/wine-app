@@ -4,7 +4,6 @@ export const TableBox = styled.div`
   width: 100%;
   padding: 2em;
   background-color: #292f38;
-  color: #ccc;
   border-radius: 5px;
   margin: 3em 0 6em 0;
   box-sizing: border-box;
@@ -16,12 +15,14 @@ export const TableTitle = styled.span`
   font-weight: 300;
   text-align: center;
   font-size: 1.3em;
+  color: #ccc;
 `;
 
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  color: #ccc;
   && tr,
   th {
     padding: 10px 20px;
@@ -36,7 +37,6 @@ export const Table = styled.table`
 `;
 
 export const Title = styled.h2`
-  color: #ccc;
   font-weight: 300;
   text-align: center;
   font-size: 2em;

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Section, Button, InputField } from "../../components";
 import * as S from "./Register.style";
 
-function registerUser(data, setNotification, history) {
+function registerUser(data) {
   fetch("http://localhost:8080/register", {
     method: "POST",
     headers: {

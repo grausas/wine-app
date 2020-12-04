@@ -1,5 +1,5 @@
 import React from "react";
-import { Section } from "../";
+import { Section, Button } from "../";
 import * as S from "./Header.style";
 import { Link } from "react-router-dom";
 import logoImg from "../../assets/wine.svg";
@@ -19,7 +19,7 @@ function Header({ isLoggedIn, logOut }) {
                 <S.StyledLink to="/winetypes">Wine Types</S.StyledLink>
                 <S.StyledLink to="/addwinetypes">Add Wine</S.StyledLink>
                 <S.StyledLink onClick={logOut} to="/login">
-                  Logout
+                  <Button color="primary">Logout</Button>
                 </S.StyledLink>
               </>
             )}

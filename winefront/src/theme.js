@@ -9,7 +9,7 @@ const theme = {
   },
   primary: {
     background: "#292f38",
-    color: "#111",
+    color: "#fff",
     hover: {
       background: "#222222",
     },
