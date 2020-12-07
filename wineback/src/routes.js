@@ -142,21 +142,26 @@ router.get("/view-wine-types", middleware.isLoggedIn, (req, res) => {
 
 router.post("/add-wine", middleware.isLoggedIn, (req, res) => {
   const userId = req.userData.userId;
+  const data = req.body;
 
-  con.query(
-    `INSERT INTO winequantity (userid, wineid, changeqty) VALUES (${mysql.escape(
-      userId
-    )}, ${mysql.escape(req.body.wineId)}, ${mysql.escape(req.body.changeQty)})`,
-    (err, result) => {
-      if (err) {
-        res.status(400).json(err);
-      } else {
-        res
-          .status(201)
-          .json({ msg: "Successfully added the wine to the database!" });
+  if (userId && data.wineId && data.changeQty) {
+    con.query(
+      `INSERT INTO winequantity (userid, wineid, changeqty) VALUES (${mysql.escape(
+        userId
+      )}, ${mysql.escape(req.body.wineId)}, ${mysql.escape(
+        req.body.changeQty
+      )})`,
+      (err, result) => {
+        if (err) {
+          res.status(400).json(err);
+        } else {
+          res
+            .status(201)
+            .json({ msg: "Successfully added the wine to the database!" });
+        }
       }
-    }
-  );
+    );
+  }
 });
 
 router.get("/view-wines", middleware.isLoggedIn, (req, res) => {
@@ -176,6 +181,22 @@ router.get("/view-names", middleware.isLoggedIn, (req, res) => {
     (err, result) => {
       if (err) throw err;
       res.json(result);
+    }
+  );
+});
+
+router.delete("/delete/:id", (req, res) => {
+  con.query(
+    `DELETE FROM wine_types WHERE id = '${req.params.id}'`,
+    (err, result) => {
+      // console.log(err);
+      // console.log(result);
+      console.log(req.params.id);
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.json(result);
+      }
     }
   );
 });
