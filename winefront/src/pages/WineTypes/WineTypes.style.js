@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../../components";
 
 export const TableBox = styled.div`
   width: 100%;
@@ -41,4 +42,17 @@ export const Title = styled.h2`
   font-weight: 300;
   text-align: center;
   font-size: 2em;
+`;
+
+export const DeleteButton = styled(Button)`
+  background: none;
+  padding: 0 1em;
+  color: #ccc;
+  &:hover {
+    color: red;
+    background: none;
+  }
+  &:focus {
+    background: none;
+  }
 `;

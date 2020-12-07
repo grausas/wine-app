@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Section, InputField, Button } from "../../components";
+import { Section, InputField, Button, Notification } from "../../components";
 import * as S from "./AddWineType.style";
 import { AuthContext } from "../../context/AuthContext";
 
-function addWine(data, auth) {
+function addWine(data, auth, setError, setType, error) {
   fetch("http://localhost:8080/add-wine-type", {
     method: "POST",
     headers: {
@@ -11,7 +11,28 @@ function addWine(data, auth) {
       Authorization: `Bearer ${auth.token}`,
     },
     body: JSON.stringify(data),
-  });
+  })
+    .then((res) => {
+      if (!res.ok) {
+        error = true;
+      } else {
+        error = false;
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (error) {
+        setType("error");
+        setError(data.msg);
+      } else {
+        setType("");
+        setError(data.msg);
+      }
+    })
+    .catch((err) => {
+      setError(err.message);
+      setType("error");
+    });
 }
 
 function AddWineType() {
@@ -22,16 +43,19 @@ function AddWineType() {
     winetype: "",
     year: "",
   });
+  const [error, setError] = useState();
+  const [type, setType] = useState();
 
   return (
     <Section>
+      {error && <Notification type={type}>{error}</Notification>}
       <h2>Add wine type</h2>
       <S.FormBox>
         <S.FormTitle>Add wine type</S.FormTitle>
         <S.Form
           onSubmit={(e) => {
             e.preventDefault();
-            addWine(data, auth);
+            addWine(data, auth, setError, setType);
           }}
         >
           <S.InputWrapper>

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import * as S from "./WineTypes.style";
-import { Section, Button, Notification } from "../../components";
+import { Section, Notification } from "../../components";
 import { AuthContext } from "../../context/AuthContext";
 
 function WineTypes() {
@@ -64,13 +64,12 @@ function WineTypes() {
                   <td>{wine.winetype}</td>
                   <td>{wine.year}</td>
                   <td>
-                    <Button
+                    <S.DeleteButton
+                      className="far fa-trash-alt"
                       value={wine.id}
                       name={wine.winename}
                       handleClick={(e) => deleteButton(e, setError, setType)}
-                    >
-                      delete
-                    </Button>
+                    ></S.DeleteButton>
                   </td>
                 </tr>
               ))}

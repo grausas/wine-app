@@ -125,7 +125,7 @@ router.post("/add-wine-type", middleware.isLoggedIn, (req, res) => {
       }
     );
   } else {
-    return res.status(201).json({ msg: "Passed values are incorrect" });
+    return res.status(400).json({ msg: "Passed values are incorrect" });
   }
 });
 
@@ -161,6 +161,8 @@ router.post("/add-wine", middleware.isLoggedIn, (req, res) => {
         }
       }
     );
+  } else {
+    return res.status(400).json({ msg: "Passed values are incorrect" });
   }
 });
 

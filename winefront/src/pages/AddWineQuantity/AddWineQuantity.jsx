@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Section, InputField, Button } from "../../components";
+import { Section, InputField, Button, Notification } from "../../components";
 import * as S from "./AddWineQuantity.style";
 import { AuthContext } from "../../context/AuthContext";
 
-function addQuantity(quantity, auth) {
+function addQuantity(quantity, auth, setError, setType, error) {
   fetch("http://localhost:8080/add-wine", {
     method: "POST",
     headers: {
@@ -11,13 +11,36 @@ function addQuantity(quantity, auth) {
       Authorization: `Bearer ${auth.token}`,
     },
     body: JSON.stringify(quantity),
-  });
+  })
+    .then((res) => {
+      if (!res.ok) {
+        error = true;
+      } else {
+        error = false;
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (error) {
+        setType("error");
+        setError(data.msg);
+      } else {
+        setType("");
+        setError(data.msg);
+      }
+    })
+    .catch((err) => {
+      setError(err.message);
+      setType("error");
+    });
 }
 
 function AddWineQuantity() {
   const auth = useContext(AuthContext);
   const [data, setData] = useState();
   const [quantity, setQuantity] = useState();
+  const [error, setError] = useState();
+  const [type, setType] = useState();
 
   useEffect(() => {
     fetch(`http://localhost:8080/view-names`, {
@@ -37,13 +60,14 @@ function AddWineQuantity() {
 
   return (
     <Section>
+      {error && <Notification type={type}>{error}</Notification>}
       <h2>Add wine quantity</h2>
       <S.FormBox>
         <S.FormTitle>Add wine quantity</S.FormTitle>
         <S.Form
           onSubmit={(e) => {
             e.preventDefault();
-            addQuantity(quantity, auth);
+            addQuantity(quantity, auth, setError, setType);
           }}
         >
           <S.TwoInputsWrapper>
