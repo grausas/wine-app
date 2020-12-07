@@ -71,8 +71,10 @@ function AddWineType() {
             <S.InputWrapper>
               <InputField
                 labelText="Year"
-                type="number"
+                type="text"
                 placeholder="Year"
+                maxLength="4"
+                minLength="4"
                 handleChange={(e) => setData({ ...data, year: e.target.value })}
               />
             </S.InputWrapper>

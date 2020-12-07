@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Section, Button, InputField } from "../../components";
+import { Section, Button, InputField, Notification } from "../../components";
 import { AuthContext } from "../../context/AuthContext";
 import * as S from "./Login.style";
 
-function signUser(data, auth, history) {
+function signUser(data, auth, setError, setType, history, error) {
   fetch("http://localhost:8080/login", {
     method: "POST",
     headers: {
@@ -12,32 +12,47 @@ function signUser(data, auth, history) {
     },
     body: JSON.stringify(data),
   })
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        error = true;
+        setType("error");
+      } else {
+        error = false;
+        setType("error");
+      }
+      return res.json();
+    })
     .then((data) => {
-      if (data.token) {
+      if (error) {
+        setError(data.msg || "Error!");
+      } else {
         auth.setToken(data.token);
         history.push("/winetypes");
-      } else {
-        console.log("Error");
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      setError(err.message);
+      setType("error");
+    });
 }
 
 function Login() {
   const [data, setData] = useState({ username: "", password: "" });
   const auth = useContext(AuthContext);
   const history = useHistory();
+  const [error, setError] = useState();
+  const [type, setType] = useState();
 
   return (
     <Section>
+      {error && <Notification type={type}>{error}</Notification>}
       <h2>Login</h2>
       <S.FormBox>
         <S.FormTitle>Enter Login Details</S.FormTitle>
         <S.Form
           onSubmit={(e) => {
             e.preventDefault();
-            signUser(data, auth, history);
+            signUser(data, auth, setError, setType, history);
           }}
         >
           <S.InputWrapper>

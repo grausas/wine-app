@@ -26,6 +26,9 @@ export const Select = styled.select`
   background: #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+
+  text-transform: capitalize;
+
   &:focus {
     border: 1px solid ${(props) => props.theme.primary.focus.background};
     outline: none;

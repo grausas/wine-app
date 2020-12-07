@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Section, Button, InputField } from "../../components";
+import { Section, Button, InputField, Notification } from "../../components";
 import * as S from "./Register.style";
 
-function registerUser(data) {
+function registerUser(data, setError, setType, error) {
   fetch("http://localhost:8080/register", {
     method: "POST",
     headers: {
@@ -12,25 +12,45 @@ function registerUser(data) {
     body: JSON.stringify(data),
   })
     .then((res) => {
+      if (!res.ok) {
+        error = true;
+        setType("error");
+      } else {
+        setType("");
+        error = false;
+      }
       return res.json();
     })
-
-    .catch((err) => console.log(err));
+    .then((data) => {
+      if (error) {
+        setError(data.msg);
+      } else {
+        setError(data.msg);
+      }
+    })
+    .catch((err) => {
+      setError(err.message);
+      setType("error");
+    });
 }
 
 function Register() {
   const [data, setData] = useState({ email: "", password: "" });
   const history = useHistory();
+  const [error, setError] = useState();
+  const [type, setType] = useState();
 
   return (
     <Section>
+      {error && <Notification type={type}>{error}</Notification>}
       <h2>Register</h2>
       <S.FormBox>
         <S.FormTitle>Enter Registration details</S.FormTitle>
+
         <S.Form
           onSubmit={(e) => {
             e.preventDefault();
-            registerUser(data, history);
+            registerUser(data, setError, setType, history);
           }}
         >
           <S.InputWrapper>

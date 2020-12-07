@@ -4,3 +4,4 @@ export { default as Section } from "./Section/Section";
 export { default as Loading } from "./Loading/Loading";
 export { default as InputField } from "./InputField/InputField";
 export { default as Footer } from "./Footer/Footer";
+export { default as Notification } from "./Notification/Notification";
